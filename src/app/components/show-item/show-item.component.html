@@ -1,0 +1,10 @@
+<a class="show-item" *ngIf="showItem">
+    <div class="show-item-rating">
+        <i class="pi pi-star"></i>
+        <span>{{showItem.vote_average}}/10</span>
+    </div>
+    <div class="show-item-image">
+        <img [src]="imageBaseUrl+'/w1280/'+showItem.poster_path" alt="">
+    </div>
+    <div class="show-item-title">{{showItem.title}}</div>
+</a>
