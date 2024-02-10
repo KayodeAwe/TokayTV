@@ -1,27 +1,41 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit} from '@angular/core';
+import { MoviesService } from '../../services/movies.service';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-slider',
   templateUrl: './slider.component.html',
-  styleUrl: './slider.component.scss'
+  styleUrl: './slider.component.scss',
+  animations: [
+    trigger('slideFade', [
+      state('void', style({opacity:0})),
+      transition('void <=> *', [animate('1s')])
+    ]),
+  ],
 })
 export class SliderComponent implements OnInit{
+  slideIndex = 0;
+  constructor(private movieService: MoviesService){}
 
-  Movie:any;
-  
-  constructor( private http:HttpClient){}
+  Movie$ = this.movieService.getPopularMovies()
 
   ngOnInit(): void {
-    this.getPopularMovies()
+    this.changSlides()
   }
 
-  getPopularMovies = () => {
-    this.http.get(
-      'https://api.themoviedb.org/3/movie/popular?api_key=d44259f5724e5664c42d195042e2adf7'
-      ).subscribe((data) => {
-        this.Movie = data
-        console.log('The popular Movie', this.Movie.results)
-      })
+
+  changSlides(){
+    setInterval(() => {
+      this.slideIndex ++
+      this.slideIndex = this.clearCounter(this.slideIndex)
+    }, 5000); 
   }
+
+  clearCounter(counter:number){
+    if(counter > 10){
+      counter = 0;
+    }
+    return counter
+  }
+
 }
