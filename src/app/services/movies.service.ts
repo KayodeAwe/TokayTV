@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MoviesDto } from '../types/movie';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +14,10 @@ export class MoviesService {
 
   constructor(private http:HttpClient) { }
 
-  getPopularMovies = () => {
+  getMoviesByType(type:string, count=20){
     return this.http.get<MoviesDto>(
-      `${this.apiUrl}/movie/popular?api_key=${this.apikey}`
-      );
+      `${this.apiUrl}/movie/${type}?api_key=${this.apikey}`
+      ).pipe(map((res) => res.results.slice(0, count)));
   }
 
-  getUpcomingMovies() {
-    return this.http.get<MoviesDto>(
-      `${this.apiUrl}/movie/upcoming?api_key=${this.apikey}`
-      );
-  }
 }

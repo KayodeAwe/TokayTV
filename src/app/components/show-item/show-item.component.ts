@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Movie } from '../../types/movie';
-import { IMAGEBASEURL } from '../../constants/images-sizes';
+import { IMAGEBASEURL } from '../../constants/image-sizes';
 
 @Component({
   selector: 'app-show-item',
