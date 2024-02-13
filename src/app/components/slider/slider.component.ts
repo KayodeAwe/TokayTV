@@ -1,7 +1,7 @@
-import { Component, OnInit} from '@angular/core';
-import { MoviesService } from '../../services/movies.service';
+import { Component, Input, OnInit} from '@angular/core';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { IMAGEBASEURL } from '../../constants/image-sizes';
+import { Movie } from '../../types/movie';
 
 @Component({
   selector: 'app-slider',
@@ -15,15 +15,19 @@ import { IMAGEBASEURL } from '../../constants/image-sizes';
   ],
 })
 export class SliderComponent implements OnInit{
-  slideIndex = 0;
-  constructor(private movieService: MoviesService ){}
 
-  Movie$ = this.movieService.getMoviesByType('popular');
+  slideIndex = 0;
+  @Input() slides : Movie[] = [];
+  @Input() isHeader = false;
+  
+  constructor( ){}
 
   imageBaseUrl = IMAGEBASEURL;
 
   ngOnInit(): void {
-    this.changSlides()
+    if(!this.isHeader){
+      this.changSlides()
+    }
   }
 
 
@@ -35,7 +39,7 @@ export class SliderComponent implements OnInit{
   }
 
   clearCounter(counter:number){
-    if(counter > 10){
+    if(counter > this.slides.length){
       counter = 0;
     }
     return counter

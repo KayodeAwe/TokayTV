@@ -15,10 +15,13 @@ export class HomeComponent {
 
   upcomingMovies$ = this.moviesService.getMoviesByType('upcoming', 12);
   topRatedMovies$ = this.moviesService.getMoviesByType('top_rated', 12);
+  popularMovies$ = this.moviesService.getMoviesByType('popular', 12)
+ 
   // popularTvSeries$ = this.tvShowsService.getShowByType('popular', 12)
   //                     .pipe(map((tvshows) => {
   //                       return mapToMovies(tvshows)
   //                     }))
   popularTvSeries$ = this.tvShowsService.getShowByType('popular', 12)
                       .pipe(map((mapToMovies)))
+
 }
