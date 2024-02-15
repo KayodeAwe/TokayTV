@@ -14,7 +14,13 @@ import { BannerComponent } from './components/banner/banner.component';
 import { ShowItemComponent } from './components/show-item/show-item.component';
 import { ShowDetailComponent } from './pages/show-detail/show-detail.component';
 import { TabViewModule } from 'primeng/tabview';
-
+import { VideoEmbedComponent } from './components/video-embed/video-embed.component';
+import { ImageModule } from 'primeng/image';
+import { CarouselModule } from 'primeng/carousel';
+import { ShowsListComponent } from './pages/shows-list/shows-list.component';
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
+import { PaginatorModule } from 'primeng/paginator';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,14 +31,21 @@ import { TabViewModule } from 'primeng/tabview';
     SliderComponent,
     BannerComponent,
     ShowItemComponent,
-    ShowDetailComponent
+    ShowDetailComponent,
+    VideoEmbedComponent,
+    ShowsListComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    TabViewModule
+    TabViewModule,
+    ImageModule,
+    CarouselModule,
+    InputTextModule,
+    FormsModule,
+    PaginatorModule 
   ],
   providers: [],
   bootstrap: [AppComponent]

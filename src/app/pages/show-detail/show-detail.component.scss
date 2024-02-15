@@ -12,3 +12,35 @@
         background-color: $primary-color;
     }
 }
+
+.poster{
+    max-width: 100%;
+    }
+
+    .overview {
+        line-height: 1.5;
+    }
+
+    .stat {
+        display: flex;
+        margin-bottom: 15px;
+        .label{
+            width: 150px;
+            font-weight: bold;
+        }
+
+        .value{
+            color: $primary-color;
+        }
+    }
+
+.show-image{
+    max-width: 100%;
+}
+
+.actor {
+    padding: 10px;
+    img {
+        width: 100%;
+    }
+}
