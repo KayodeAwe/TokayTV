@@ -35,34 +35,34 @@ export class ShowDetailComponent implements OnInit{
 
 
   ngOnInit(): void {
-    this.showId = this.router.snapshot.params['id']
-    this.show$ = this.moviesService.getMovieById(this.showId)
-    this.showVideos$ = this.moviesService.getMovieVideos(this.showId)
-    this.showImages$ = this.moviesService.getMovieImages(this.showId);
-    this.showCast$ = this.moviesService.getMovieCast(this.showId);
-    this.showSimilarMovies$ = this.moviesService.getSimilarMovies(this.showId)
 
-    this.showId = this.router.snapshot.params['id'];
-    this.showType = this.router.snapshot.params['type'];
+      this.router.params.subscribe((params) =>{
 
-    if (this.showType === 'movie') {
-      this.show$ = this.moviesService.getMovieById(this.showId);
-      this.showVideos$ = this.moviesService.getMovieVideos(this.showId);
-      this.showImages$ = this.moviesService.getMovieImages(this.showId);
-      this.showCast$ = this.moviesService.getMovieCast(this.showId);
-      this.showSimilarMovies$ = this.moviesService.getSimilarMovies(this.showId);
-    }
-    if (this.showType === 'tv') {
-      this.show$ = this.tvService
-        .getTvShowById(this.showId)
-        .pipe(map(mapToMovie));
-      this.showVideos$ = this.tvService.getTvShowVideos(this.showId);
-      this.showImages$ = this.tvService.getTvShowImages(this.showId);
-      this.showCast$ = this.tvService.getTvShowCast(this.showId);
-      this.showSimilarMovies$ = this.tvService
-        .getTvShowSimilar(this.showId)
-        .pipe(map(mapToMovies));
-    }
+          this.showId = params['id'];
+          this.showType = params['type'];
+          
+        if (this.showType === 'movie') {
+          this.show$ = this.moviesService.getMovieById(this.showId);
+          this.showVideos$ = this.moviesService.getMovieVideos(this.showId);
+          this.showImages$ = this.moviesService.getMovieImages(this.showId);
+          this.showCast$ = this.moviesService.getMovieCast(this.showId);
+          this.showSimilarMovies$ = this.moviesService.getSimilarMovies(this.showId);
+        }
+
+        if (this.showType === 'tv') {
+          this.show$ = this.tvService
+            .getTvShowById(this.showId)
+            .pipe(map(mapToMovie));
+          this.showVideos$ = this.tvService.getTvShowVideos(this.showId);
+          this.showImages$ = this.tvService.getTvShowImages(this.showId);
+          this.showCast$ = this.tvService.getTvShowCast(this.showId);
+          this.showSimilarMovies$ = this.tvService
+            .getTvShowSimilar(this.showId)
+            .pipe(map(mapToMovies));
+        }
+
+      })
+
   }
 
   }

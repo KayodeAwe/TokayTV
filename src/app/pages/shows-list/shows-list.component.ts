@@ -6,11 +6,18 @@ import { PaginatorState } from 'primeng/paginator';
 import { ActivatedRoute } from '@angular/router';
 import { TvshowsService } from '../../services/tvshows.service';
 import { mapToMoviesDto } from '../../types/tvShow';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-shows-list',
   templateUrl: './shows-list.component.html',
-  styleUrl: './shows-list.component.scss'
+  styleUrl: './shows-list.component.scss',
+  animations: [
+    trigger('slideFade', [
+      state('void', style({opacity:0})),
+      transition('void <=> *', [animate('0.3s')])
+    ]),
+  ],
 })
 export class ShowsListComponent implements OnInit{
 
@@ -22,8 +29,12 @@ export class ShowsListComponent implements OnInit{
   constructor( private moviesService : MoviesService, private router : ActivatedRoute, private tvShowsService : TvshowsService){}
 
   ngOnInit(): void {
-    this.showListType = this.router.snapshot.params['type'];
-    this.getPagedShows(this.showListType, 1)
+    this.router.params.subscribe((params) => {
+      this.showListType = params['type'];
+      this.getPagedShows(this.showListType, 1)
+    })
+    
+
   }
 
 
@@ -45,7 +56,7 @@ export class ShowsListComponent implements OnInit{
   pageChanged( event:PaginatorState){
       const pageNumber = event.page ? event.page + 1 : 1;
       this.getPagedShows(this.showListType, pageNumber, this.searchValue)
-    }
+  }
 
 
     //Check if it is TV Show or Movie

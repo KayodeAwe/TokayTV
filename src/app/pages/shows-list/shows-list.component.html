@@ -9,7 +9,7 @@
         </div>
     </div>
     <ng-container *ngIf="showsList$ | async as showsList">
-        <div class="grid">
+        <div class="grid" @slideFade>
             <div class="col-2" *ngFor="let show of showsList.results">
                 <app-show-item [showItem]="show"/>
             </div>
